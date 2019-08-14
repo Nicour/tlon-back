@@ -6,7 +6,7 @@ const bookSchema = new Schema({
   author: String,
   editorial: String,
   image: String,
-  revies: [],
+  reviews: [],
   category: {
     type: String,
     enum: ['Novel', 'Short story', 'Essay', 'Philosophy', 'Sociology', 'History']
