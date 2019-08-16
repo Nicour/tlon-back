@@ -3,6 +3,7 @@
 const express = require('express')
 const router = express.Router()
 const Book = require('../models/book')
+const User = require('../models/user')
 
 router.get('/books', async (req, res, next) => {
   try {
@@ -17,7 +18,10 @@ router.post('/books/new', async (req, res, next) => {
   try {
     const newBook = req.body
     const createdBook = await Book.create(newBook)
-    res.status(200).json(createdBook)
+    const bookId = createdBook._id
+    const id = req.session.currentUser._id
+    const userWithBook = await User.findByIdAndUpdate(id, { $push: { myBooks: bookId } })
+    res.status(200).json(userWithBook)
   } catch (error) {
     next(error)
   }

@@ -1,12 +1,18 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const ObjectId = Schema.Types.ObjectId
 
 const bookSchema = new Schema({
   name: String,
   author: String,
   editorial: String,
-  image: String,
-  reviews: [],
+  image: {
+    type: String
+  },
+  reviews: {
+    type: ObjectId,
+    ref: 'review'
+  },
   category: {
     type: String,
     enum: ['Novel', 'Short story', 'Essay', 'Philosophy', 'Sociology', 'History']
