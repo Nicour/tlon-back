@@ -10,7 +10,10 @@ const userSchema = new Schema({
     type: ObjectId,
     ref: 'book'
   }],
-  favorites: []
+  favorites: {
+    type: ObjectId,
+    ref: 'book'
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',

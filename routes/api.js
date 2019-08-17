@@ -27,6 +27,16 @@ router.post('/books/new', async (req, res, next) => {
   }
 })
 
+router.get('/books/:id/update', async (req, res, next) => {
+  const { id } = req.params
+  try {
+    const book = await Book.findById(id)
+    res.status(200).json(book)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.put('/books/:id/update', async (req, res, next) => {
   const { id } = req.params
   const bookUpdated = req.body
