@@ -27,7 +27,7 @@ router.post('/books/new', async (req, res, next) => {
   }
 })
 
-router.get('/books/:id/update', async (req, res, next) => {
+router.get('/books/:id', async (req, res, next) => {
   const { id } = req.params
   try {
     const book = await Book.findById(id)
