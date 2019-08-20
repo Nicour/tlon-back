@@ -4,6 +4,7 @@ const express = require('express')
 const router = express.Router()
 const Book = require('../models/book')
 const User = require('../models/user')
+const Review = require('../models/review')
 
 router.get('/books', async (req, res, next) => {
   try {
@@ -32,6 +33,31 @@ router.get('/books/:id', async (req, res, next) => {
   try {
     const book = await Book.findById(id)
     res.status(200).json(book)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/books/:id/addreview', async (req, res, next) => {
+  const { id } = req.params
+  try {
+    const newReview = req.body
+    const createdReview = await Review.create(newReview)
+    console.log(createdReview)
+    const reviewId = createdReview._id
+    const bookWithReviews = await Book.findByIdAndUpdate(id, { $push: { reviews: reviewId } })
+    res.status(200).json(bookWithReviews)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/books/:id/reviews', async (req, res, next) => {
+  const { id } = req.params
+  try {
+    const book = await Book.findById(id)// .populate('reviews')
+    console.log(book)
+    res.status(200).json({ book })
   } catch (error) {
     next(error)
   }

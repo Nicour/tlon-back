@@ -3,9 +3,18 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
 const userSchema = new Schema({
-  username: String,
-  password: String,
-  email: String,
+  username: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
   myBooks: [{
     type: ObjectId,
     ref: 'book'

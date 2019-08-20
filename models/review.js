@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
 const reviewSchema = new Schema({
-  review: String,
+  review: '',
   user: {
     type: ObjectId,
     ref: 'user'

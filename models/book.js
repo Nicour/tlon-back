@@ -3,16 +3,26 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
 const bookSchema = new Schema({
-  name: String,
-  author: String,
-  editorial: String,
-  image: {
-    type: String
+  name: {
+    type: String,
+    required: true
   },
-  reviews: {
+  author: {
+    type: String,
+    required: true
+  },
+  editorial: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String,
+    required: true
+  },
+  reviews: [{
     type: ObjectId,
     ref: 'review'
-  },
+  }],
   category: {
     type: String,
     enum: ['Novel', 'Short story', 'Essay', 'Philosophy', 'Sociology', 'History']
