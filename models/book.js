@@ -21,7 +21,7 @@ const bookSchema = new Schema({
   },
   reviews: [{
     type: ObjectId,
-    ref: 'review'
+    ref: 'Review'
   }],
   category: {
     type: String,

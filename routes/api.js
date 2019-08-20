@@ -31,7 +31,7 @@ router.post('/books/new', async (req, res, next) => {
 router.get('/books/:id', async (req, res, next) => {
   const { id } = req.params
   try {
-    const book = await Book.findById(id)
+    const book = await Book.findById(id).populate('reviews')
     res.status(200).json(book)
   } catch (error) {
     next(error)
@@ -55,9 +55,9 @@ router.post('/books/:id/addreview', async (req, res, next) => {
 router.get('/books/:id/reviews', async (req, res, next) => {
   const { id } = req.params
   try {
-    const book = await Book.findById(id)// .populate('reviews')
+    const book = await Book.findById(id).populate('reviews')
     console.log(book)
-    res.status(200).json({ book })
+    res.status(200).json(book)
   } catch (error) {
     next(error)
   }
