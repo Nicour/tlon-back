@@ -43,7 +43,6 @@ router.post('/books/:id/addreview', async (req, res, next) => {
   try {
     const newReview = req.body
     const createdReview = await Review.create(newReview)
-    console.log(createdReview)
     const reviewId = createdReview._id
     const bookWithReviews = await Book.findByIdAndUpdate(id, { $push: { reviews: reviewId } })
     res.status(200).json(bookWithReviews)
@@ -56,7 +55,6 @@ router.get('/books/:id/reviews', async (req, res, next) => {
   const { id } = req.params
   try {
     const book = await Book.findById(id).populate('reviews')
-    console.log(book)
     res.status(200).json(book)
   } catch (error) {
     next(error)
